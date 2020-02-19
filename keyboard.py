@@ -4,14 +4,9 @@ import time
 
 NULL_CHAR = chr(0)
 
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setwarnings(True)
-#GPIO.setup(23, GPIO.IN,GPIO.PUD_DOWN)
-#GPIO.setup(24, GPIO.OUT)
 switch1 = Button(23,pull_up=False)
 led = LED(24)
 
-#last_state = GPIO.input(23)
 last_state = switch1.is_pressed
 
 def send_keys(keys):
@@ -35,7 +30,6 @@ def switch1_actions(state):
 while True:
 
     # Switch 1
-    #current_state = GPIO.input(23)
     current_state = switch1.is_pressed
     if current_state != last_state:
         #print("last state: %d" % last_state)
@@ -44,5 +38,5 @@ while True:
         keys = switch1_actions(current_state)
         send_keys(keys)
 
-    time.sleep(0.1)
+    time.sleep(0.01)
 
