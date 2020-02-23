@@ -15,6 +15,8 @@ switch7A = Button(9,pull_up=False)
 switch7B = Button(11,pull_up=False)
 switch8A = Button(5,pull_up=False)
 switch8B = Button(6,pull_up=False)
+switch9A = Button(14,pull_up=False)
+switch10A = Button(15,pull_up=False)
 
 def send_keys(keys,momentary=False):
     with open('/dev/hidg0', 'rb+') as fd:
@@ -28,46 +30,46 @@ def send_keys(keys,momentary=False):
 ####
 def switch1A_actions(state):
     if state == 0:
-        print ("Switch pressed")
+        print ("Switch 1A pressed")
         keys = NULL_CHAR*2 + chr(22) + NULL_CHAR*5
     else:
-        print ("Switch off")
+        print ("Switch 1A off")
         keys = NULL_CHAR*8
     return(keys)
 
 def switch2A_actions(state):
     if state == 0:
-        print ("Switch pressed")
+        print ("Switch 2A pressed")
         keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
     else:
-        print ("Switch off")
+        print ("Switch 2A off")
         keys = NULL_CHAR*8
     return(keys)
 
 def switch3A_actions(state):
     if state == 0:
-        print ("Switch pressed")
+        print ("Switch 3A pressed")
         keys = NULL_CHAR*2 + chr(24) + NULL_CHAR*5
     else:
-        print ("Switch off")
+        print ("Switch 3A off")
         keys = NULL_CHAR*8
     return(keys)
 
 def switch4A_actions(state):
     if state == 0:
-        print ("Switch pressed")
+        print ("Switch 4A pressed")
         keys = NULL_CHAR*2 + chr(26) + NULL_CHAR*5
     else:
-        print ("Switch off")
+        print ("Switch 4A off")
         keys = chr(32)+NULL_CHAR + chr(26) + NULL_CHAR*5
     return(keys)
 
 def switch5A_actions(state):
     if state == 0:
-        print ("Switch pressed")
+        print ("Switch 5A pressed")
         keys = NULL_CHAR*2 + chr(20) + NULL_CHAR*5
     else:
-        print ("Switch off")
+        print ("Switch 5A off")
         keys = chr(32)+NULL_CHAR + chr(20) + NULL_CHAR*5
     return(keys)
 
@@ -76,55 +78,73 @@ def switch5A_actions(state):
 # but inverted in the SPST switches
 def switch6A_actions(state):
     if state == 1:
-        print ("Switch pressed")
+        print ("Switch 6A pressed")
         keys = NULL_CHAR*2 + chr(47) + NULL_CHAR*5
     else:
-        print ("Switch off")
+        print ("Switch 6A off")
         keys = NULL_CHAR*8
     return(keys)
 
 def switch6B_actions(state):
     if state == 1:
-        print ("Switch pressed")
+        print ("Switch 6B pressed")
         keys = NULL_CHAR*2 + chr(48) + NULL_CHAR*5
     else:
-        print ("Switch off")
+        print ("Switch 6B off")
         keys = NULL_CHAR*8
     return(keys)
 
 def switch7A_actions(state):
     if state == 1:
-        print ("Switch pressed")
+        print ("Switch 7A pressed")
         keys = NULL_CHAR*2 + chr(38) + NULL_CHAR*5
     else:
-        print ("Switch off")
+        print ("Switch 7A off")
         keys = NULL_CHAR*8
     return(keys)
 
 def switch7B_actions(state):
     if state == 1:
-        print ("Switch pressed")
+        print ("Switch 7B pressed")
         keys = NULL_CHAR*2 + chr(32) + NULL_CHAR*5
     else:
-        print ("Switch off")
+        print ("Switch 7B off")
         keys = NULL_CHAR*8
     return(keys)
 
 def switch8A_actions(state):
     if state == 1:
-        print ("Switch pressed")
+        print ("Switch 8A pressed")
         keys = NULL_CHAR*2 + chr(31) + NULL_CHAR*5
     else:
-        print ("Switch off")
+        print ("Switch 8A off")
         keys = NULL_CHAR*8
     return(keys)
 
 def switch8B_actions(state):
     if state == 1:
-        print ("Switch pressed")
+        print ("Switch 8B pressed")
         keys = NULL_CHAR*2 + chr(32) + NULL_CHAR*5
     else:
-        print ("Switch off")
+        print ("Switch 8B off")
+        keys = NULL_CHAR*8
+    return(keys)
+
+def switch9A_actions(state):
+    if state == 1:
+        print ("Switch 9A pressed")
+        keys = NULL_CHAR*2 + chr(22) + NULL_CHAR*5
+    else:
+        print ("Switch 9A off")
+        keys = NULL_CHAR*8
+    return(keys)
+
+def switch10A_actions(state):
+    if state == 0: # NOTE: For some reason the logic in this switch is inverted.
+        print ("Switch 10A pressed")
+        keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
+    else:
+        print ("Switch 10A off")
         keys = NULL_CHAR*8
     return(keys)
 
@@ -141,7 +161,9 @@ switch_list = [(switch1A,True,switch1A_actions),
                (switch7A,False,switch7A_actions),
                (switch7B,False,switch7B_actions),
                (switch8A,True,switch8A_actions),
-               (switch8B,True,switch8B_actions)]
+               (switch8B,True,switch8B_actions),
+               (switch9A,False,switch9A_actions),
+               (switch10A,False,switch10A_actions)]
 
 
 #=======
