@@ -40,19 +40,19 @@ def switch1A_actions(state):
 def switch2A_actions(state):
     if state == 0:
         print ("Switch 2A pressed")
-        keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
+        keys = NULL_CHAR*2 + chr(21) + NULL_CHAR*5
     else:
         print ("Switch 2A off")
-        keys = NULL_CHAR*8
+        keys = chr(32)+NULL_CHAR + chr(21) + NULL_CHAR*5
     return(keys)
 
 def switch3A_actions(state):
     if state == 0:
         print ("Switch 3A pressed")
-        keys = NULL_CHAR*2 + chr(24) + NULL_CHAR*5
+        keys = NULL_CHAR*2 + chr(8) + NULL_CHAR*5
     else:
         print ("Switch 3A off")
-        keys = NULL_CHAR*8
+        keys = chr(32)+NULL_CHAR + chr(8) + NULL_CHAR*5
     return(keys)
 
 def switch4A_actions(state):
