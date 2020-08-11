@@ -2,6 +2,10 @@
 from gpiozero import LED, Button
 import time
 
+# Imports for rotary-encoder
+import gaugette.rotary_encoder
+import gaugette.switch
+
 NULL_CHAR = chr(0)
 
 switch1A = Button(13,pull_up=False)
@@ -17,6 +21,23 @@ switch8A = Button(5,pull_up=False)
 switch8B = Button(6,pull_up=False)
 switch9A = Button(14,pull_up=False)
 switch10A = Button(15,pull_up=False)
+
+# Rotary encoders
+# TODO: Replace with correct pin numbers
+rotary1A  = 1
+rotary1B  = 2
+rotary1SW = 3
+rotary2A  = 4
+rotary2B  = 5
+rotary2SW = 6
+
+# Start the rotary_encoder subprocesses for each of the encoders
+rotary1 = gaugette.rotary_encoder.RotaryEncoder.Worker(rotary1A, rotary1B)
+rotary1.start()
+rotary1SW = gaugette.switch.Switch(rotary1SW)
+rotary2 = gaugette.rotary_encoder.RotaryEncoder.Worker(rotary2A, rotary2B)
+rotary2.start()
+rotary2SW = gaugette.switch.Switch(rotary2SW)
 
 def send_keys(keys,momentary=False):
     with open('/dev/hidg0', 'rb+') as fd:
@@ -148,7 +169,41 @@ def switch10A_actions(state):
         keys = NULL_CHAR*8
     return(keys)
 
+def rotary1SW_actions(state):
+    if state == 0: # NOTE: For some reason the logic in this switch is inverted.
+        print ("Rotary 1 Switch pressed")
+        # keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
+    else:
+        print ("Rotary 1 Switch off")
+        # keys = NULL_CHAR*8
+    return(keys)
 
+def rotary2SW_actions(state):
+    if state == 0: # NOTE: For some reason the logic in this switch is inverted.
+        print ("Rotary 2 Switch pressed")
+        # keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
+    else:
+        print ("Rotary 1 Switch off")
+        # keys = NULL_CHAR*8
+    return(keys)
+
+def rotary1_actions(delta):
+    if delta < 0:
+        print ("Rotary 1 turned clockwise")
+        # keys = ????
+    else:
+        print ("Rotary 1 turned anticlockwise")
+        # keys = ????
+    return(keys)
+
+def rotary2_actions(delta):
+    if delta < 0:
+        print ("Rotary 2 turned clockwise")
+        # keys = ????
+    else:
+        print ("Rotary 2 turned anticlockwise")
+        # keys = ????
+    return(keys)
 
 # (switchID, momentary=True/False,action_function)
 switch_list = [(switch1A,True,switch1A_actions),
@@ -163,8 +218,12 @@ switch_list = [(switch1A,True,switch1A_actions),
                (switch8A,True,switch8A_actions),
                (switch8B,True,switch8B_actions),
                (switch9A,False,switch9A_actions),
-               (switch10A,False,switch10A_actions)]
+               (switch10A,False,switch10A_actions),
+               (rotary1SW,False,rotary1SW_actions),
+               (rotary2SW,False,rotary2SW_actions) ]
 
+rotary_list = [(rotary1,rotary1_actions),
+               (rotary2,rotary2_actions)]
 
 #=======
 # END Switch actions
@@ -186,6 +245,12 @@ while True:
             #print("state: %d" % current_state)
             keys = action(current_state)
             send_keys(keys,momentary)
+
+    for rotary,action in rotary_list:
+        delta = rotary.get_delta()
+        if delta!=0:
+            keys = action(delta)
+            send_keys(keys,True)
 
     time.sleep(0.01)
 
