@@ -36,7 +36,7 @@ rotary2B  = 2
 rotary2SW = 3
 
 # Start the rotary_encoder subprocesses for each of the encoders
-gpio = gaugette.gpio
+gpio = gaugette.gpio.GPIO()
 rotary1 = gaugette.rotary_encoder.RotaryEncoder.Worker(gpio, rotary1A, rotary1B)
 rotary1.start()
 rotary1SW = gaugette.switch.Switch(rotary1SW)
