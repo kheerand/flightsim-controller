@@ -242,8 +242,9 @@ for switch,*_,lib_type in switch_list:
     if lib_type == 'gaugette': last_state[switch] = switch.get_state()
 
 while True:
-    for switch,momentary,action,*_ in switch_list:
-        current_state = switch.is_pressed
+    for switch,momentary,action,lib_type in switch_list:
+        if lib_type == 'pyz': current_state = switch.is_pressed
+        if lib_type == 'gaugette': current_state = switch.get_state()
         if current_state != last_state[switch]:
             #print("last state: %d" % last_state)
             last_state[switch] = current_state
