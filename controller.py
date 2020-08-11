@@ -39,10 +39,10 @@ rotary2SW = 3
 gpio = gaugette.gpio.GPIO()
 rotary1 = gaugette.rotary_encoder.RotaryEncoder.Worker(gpio, rotary1A, rotary1B)
 rotary1.start()
-rotary1SW = gaugette.switch.Switch(rotary1SW)
+rotary1SW = gaugette.switch.Switch(gpio, rotary1SW)
 rotary2 = gaugette.rotary_encoder.RotaryEncoder.Worker(gpio, rotary2A, rotary2B)
 rotary2.start()
-rotary2SW = gaugette.switch.Switch(rotary2SW)
+rotary2SW = gaugette.switch.Switch(gpio, rotary2SW)
 
 def send_keys(keys,momentary=False):
     with open('/dev/hidg0', 'rb+') as fd:
