@@ -238,7 +238,13 @@ last_state = {}
 
 # Init the last_state dictionary
 for switch,*_ in switch_list:
-    last_state[switch] = switch.is_pressed
+    # differentiate between gpiozero switches and py-gaugette switches
+    try:
+        # gpiozero
+        last_state[switch] = switch.is_pressed
+    except:
+        # py-gaugette
+        last_state[switch] = switch.get_state()
 
 
 while True:
