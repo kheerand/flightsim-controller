@@ -211,21 +211,21 @@ def rotary2_actions(delta):
     return(keys)
 
 # (switchID, momentary=True/False,action_function)
-switch_list = [(switch1A,True,switch1A_actions),
-               (switch2A,True,switch2A_actions),
-               (switch3A,True,switch3A_actions),
-               (switch4A,True,switch4A_actions),
-               (switch5A,True,switch5A_actions),
-               (switch6A,False,switch6A_actions),
-               (switch6B,False,switch6B_actions),
-               (switch7A,False,switch7A_actions),
-               (switch7B,False,switch7B_actions),
-               (switch8A,True,switch8A_actions),
-               (switch8B,True,switch8B_actions),
-               (switch9A,False,switch9A_actions),
-               (switch10A,False,switch10A_actions),
-               (rotary1SW,False,rotary1SW_actions),
-               (rotary2SW,False,rotary2SW_actions) ]
+switch_list = [(switch1A,True,switch1A_actions,'pyz'),
+               (switch2A,True,switch2A_actions,'pyz'),
+               (switch3A,True,switch3A_actions,'pyz'),
+               (switch4A,True,switch4A_actions,'pyz'),
+               (switch5A,True,switch5A_actions,'pyz'),
+               (switch6A,False,switch6A_actions,'pyz'),
+               (switch6B,False,switch6B_action,'pyz'),
+               (switch7A,False,switch7A_action,'pyz'),
+               (switch7B,False,switch7B_action,'pyz'),
+               (switch8A,True,switch8A_action,'pyz'),
+               (switch8B,True,switch8B_action,'pyz'),
+               (switch9A,False,switch9A_actions,'pyz'),
+               (switch10A,False,switch10A_actions,'pyz'),
+               (rotary1SW,False,rotary1SW_actions,'gaugette'),
+               (rotary2SW,False,rotary2SW_actions,'gaugette') ]
 
 rotary_list = [(rotary1,rotary1_actions),
                (rotary2,rotary2_actions)]
@@ -237,18 +237,12 @@ rotary_list = [(rotary1,rotary1_actions),
 last_state = {}
 
 # Init the last_state dictionary
-for switch,*_ in switch_list:
-    # differentiate between gpiozero switches and py-gaugette switches
-    try:
-        # gpiozero
-        last_state[switch] = switch.is_pressed
-    except:
-        # py-gaugette
-        last_state[switch] = switch.get_state()
-
+for switch,*_,lib_type in switch_list:
+    if lib_type == 'pyz': last_state[switch] = switch.is_pressed
+    if lib_type == 'gaugette': last_state[switch] = switch.get_state()
 
 while True:
-    for switch,momentary,action in switch_list:
+    for switch,momentary,action,*_ in switch_list:
         current_state = switch.is_pressed
         if current_state != last_state[switch]:
             #print("last state: %d" % last_state)
