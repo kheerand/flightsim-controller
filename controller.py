@@ -3,6 +3,7 @@ from gpiozero import LED, Button
 import time
 
 # Imports for rotary-encoder
+import gaugette.gpio
 import gaugette.rotary_encoder
 import gaugette.switch
 
@@ -23,19 +24,23 @@ switch9A = Button(14,pull_up=False)
 switch10A = Button(15,pull_up=False)
 
 # Rotary encoders
+# The numbers here relate to wiringpi references to the GPIO ports
+# details are taken from here:
+# https://guy.carpenter.id.au/gaugette/blog/2013/01/14/rotary-encoder-library-for-the-raspberry-pi/
+rotary1A  = 4
+rotary1B  = 5
+rotary1SW = 6
 # TODO: Replace with correct pin numbers
-rotary1A  = 1
-rotary1B  = 2
-rotary1SW = 3
-rotary2A  = 4
-rotary2B  = 5
-rotary2SW = 6
+rotary2A  = 1
+rotary2B  = 2
+rotary2SW = 3
 
 # Start the rotary_encoder subprocesses for each of the encoders
-rotary1 = gaugette.rotary_encoder.RotaryEncoder.Worker(rotary1A, rotary1B)
+gpio = gaugette.gpio
+rotary1 = gaugette.rotary_encoder.RotaryEncoder.Worker(gpio, rotary1A, rotary1B)
 rotary1.start()
 rotary1SW = gaugette.switch.Switch(rotary1SW)
-rotary2 = gaugette.rotary_encoder.RotaryEncoder.Worker(rotary2A, rotary2B)
+rotary2 = gaugette.rotary_encoder.RotaryEncoder.Worker(gpio, rotary2A, rotary2B)
 rotary2.start()
 rotary2SW = gaugette.switch.Switch(rotary2SW)
 
