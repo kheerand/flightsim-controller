@@ -6,9 +6,11 @@ https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/
 
 ### Rotary encoder
 The rotary encoder code is using the instructions found at:
+
 https://guy.carpenter.id.au/gaugette/blog/2013/01/14/rotary-encoder-library-for-the-raspberry-pi/
 
 However the code in it is for an older version of py-gaugette.  This code has been modified to the current version (as of Aug 2020) of py-gaugette.
+
 https://github.com/guyc/py-gaugette
 
 ## Setup
