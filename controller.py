@@ -253,7 +253,7 @@ while True:
             send_keys(keys,momentary)
 
     for rotary,action in rotary_list:
-        delta = rotary.get_delta()
+        delta = rotary.get_cycles()
         if delta!=0:
             keys = action(delta)
             send_keys(keys,True)
