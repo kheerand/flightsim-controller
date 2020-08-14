@@ -165,8 +165,7 @@ def switch9A_actions(state):
         keys = NULL_CHAR*8
     return(keys)
 
-def switch1A_actions(state):
-    print("Rotary switch1A_action being executed")
+def switch10A_actions(state):
     if state == 0: # NOTE: For some reason the logic in this switch is inverted.
         print ("Switch 10A pressed")
         keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
@@ -195,6 +194,7 @@ def rotary2SW_actions(state):
     return(keys)
 
 def rotary1_actions(delta):
+    print("Rotary rotary1_actions being executed")
     if delta < 0:
         print ("Rotary 1 turned clockwise")
         # keys = ????
