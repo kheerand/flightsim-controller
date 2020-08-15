@@ -185,6 +185,7 @@ def rotary1SW_actions(state):
     return(keys)
 
 def rotary2SW_actions(state):
+    keys = ''
     if state == 0: # NOTE: For some reason the logic in this switch is inverted.
         print ("Rotary 2 Switch pressed")
         # keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
@@ -194,6 +195,7 @@ def rotary2SW_actions(state):
     return(keys)
 
 def rotary1_actions(delta):
+    keys = ''
     print("Rotary rotary1_actions being executed")
     if delta < 0:
         print ("Rotary 1 turned clockwise")
@@ -204,6 +206,7 @@ def rotary1_actions(delta):
     return(keys)
 
 def rotary2_actions(delta):
+    keys = ''
     if delta < 0:
         print ("Rotary 2 turned clockwise")
         # keys = ????
@@ -241,7 +244,10 @@ last_state = {}
 # Init the last_state dictionary
 for switch,*_,lib_type in switch_list:
     if lib_type == 'pyz': last_state[switch] = switch.is_pressed
-    if lib_type == 'gaugette': last_state[switch] = switch.get_state()
+    if lib_type == 'gaugette': 
+        last_state[switch] = switch.get_state()
+        #DEBUG
+        print('rotary switch state: {}'.format(last_state[switch]))
 
 while True:
     for switch,momentary,action,lib_type in switch_list:
@@ -256,6 +262,8 @@ while True:
 
     for rotary,action in rotary_list:
         delta = rotary.get_cycles()
+        #DEBUG
+        print('rotary delta = {}'.format(delta))
         if delta!=0:
             print('rotary enxoder...')
             keys = action(delta)
