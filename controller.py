@@ -176,7 +176,7 @@ def switch10A_actions(state):
 
 def rotary1SW_actions(state):
     print("Rotary switch1SW_action being executed")
-    if state == 0: # NOTE: For some reason the logic in this switch is inverted.
+    if state == 1:
         print ("Rotary 1 Switch pressed")
         # keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
     else:
@@ -186,7 +186,7 @@ def rotary1SW_actions(state):
 
 def rotary2SW_actions(state):
     keys = ''
-    if state == 0: # NOTE: For some reason the logic in this switch is inverted.
+    if state == 1:
         print ("Rotary 2 Switch pressed")
         # keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
     else:
@@ -262,10 +262,8 @@ while True:
 
     for rotary,action in rotary_list:
         delta = rotary.get_cycles()
-        #DEBUG
-        # print('rotary delta = {}'.format(delta))
         if delta!=0:
-            print('rotary enxoder...')
+            print('rotary encoder...')
             keys = action(delta)
             send_keys(keys,True)
 
