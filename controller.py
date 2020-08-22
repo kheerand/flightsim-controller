@@ -175,6 +175,7 @@ def switch10A_actions(state):
     return(keys)
 
 def rotary1SW_actions(state):
+    keys = ''
     print("Rotary switch1SW_action being executed")
     if state == 1:
         print ("Rotary 1 Switch pressed")
