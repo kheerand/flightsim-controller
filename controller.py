@@ -263,7 +263,7 @@ while True:
     for rotary,action in rotary_list:
         delta = rotary.get_cycles()
         #DEBUG
-        print('rotary delta = {}'.format(delta))
+        # print('rotary delta = {}'.format(delta))
         if delta!=0:
             print('rotary enxoder...')
             keys = action(delta)
