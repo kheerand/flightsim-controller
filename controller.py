@@ -14,7 +14,7 @@ switch2A = Button(19,pull_up=False)
 switch3A = Button(26,pull_up=False)
 switch4A = Button(17,pull_up=False)
 switch5A = Button(27,pull_up=False)
-switch6A = Button(22,pull_up=False)
+switch6A = Button(4,pull_up=False)
 switch6B = Button(10,pull_up=False)
 switch7A = Button(9,pull_up=False)
 switch7B = Button(11,pull_up=False)
@@ -175,7 +175,6 @@ def switch10A_actions(state):
     return(keys)
 
 def rotary1SW_actions(state):
-    keys = ''
     print("Rotary switch1SW_action being executed")
     if state == 1:
         print ("Rotary 1 Switch pressed")
