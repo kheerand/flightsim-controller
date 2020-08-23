@@ -38,9 +38,11 @@ rotary2SW = 3
 # Start the rotary_encoder subprocesses for each of the encoders
 gpio = gaugette.gpio.GPIO()
 rotary1 = gaugette.rotary_encoder.RotaryEncoder(gpio, rotary1A, rotary1B)
+rotary1.mhz_state = 0 # Additional status flag to remember switch presses
 rotary1.start()
 rotary1SW = gaugette.switch.Switch(gpio, rotary1SW)
 rotary2 = gaugette.rotary_encoder.RotaryEncoder(gpio, rotary2A, rotary2B)
+rotary2.mhz_state = 0 # Additional status flag to remember switch presses
 rotary2.start()
 rotary2SW = gaugette.switch.Switch(gpio, rotary2SW)
 
@@ -175,13 +177,20 @@ def switch10A_actions(state):
     return(keys)
 
 def rotary1SW_actions(state):
+    keys = ''
     print("Rotary switch1SW_action being executed")
+
+    # TODO: This bit is a ugly coding. Fix up later to be clean so that
+    # the global variable is set in the main code rather than inside
+    # this function.
     if state == 1:
         print ("Rotary 1 Switch pressed")
         # keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
+        rotary1.mhz_state = 1
     else:
         print ("Rotary 1 Switch off")
         # keys = NULL_CHAR*8
+        rotary1.mhz_state = 0
     return(keys)
 
 def rotary2SW_actions(state):
@@ -199,10 +208,11 @@ def rotary1_actions(delta):
     print("Rotary rotary1_actions being executed")
     if delta < 0:
         print ("Rotary 1 turned clockwise")
-        keys = chr(32) + NULL_CHAR + chr(50) + NULL_CHAR*5
+        keys = chr(229) + NULL_CHAR + chr(29) + NULL_CHAR*5
     else:
         print ("Rotary 1 turned anticlockwise")
-        keys = NULL_CHAR*2 + chr(50) + NULL_CHAR*5
+        # keys = NULL_CHAR*2 + chr(50) + NULL_CHAR*5
+        keys = NULL_CHAR*2 + chr(29) + NULL_CHAR*5
     return(keys)
 
 def rotary2_actions(delta):
