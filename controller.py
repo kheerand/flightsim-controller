@@ -22,6 +22,7 @@ switch8A = Button(5,pull_up=False)
 switch8B = Button(6,pull_up=False)
 switch9A = Button(14,pull_up=False)
 switch10A = Button(15,pull_up=False)
+switch11A = Button(21,pull_up=False)
 
 # Rotary encoders
 # The numbers here relate to wiringpi references to the GPIO ports
@@ -176,6 +177,15 @@ def switch10A_actions(state):
         keys = NULL_CHAR*8
     return(keys)
 
+def switch11A_actions(state):
+    if state == 1: 
+        print ("Switch 11A pressed")
+        keys = chr(0x10) + NULL_CHAR + chr(23) + NULL_CHAR*5
+    else:
+        print ("Switch 11A off")
+        keys = NULL_CHAR*8
+    return(keys)
+
 def rotary1SW_actions(state):
     keys = ''
     print("Rotary switch1SW_action being executed")
@@ -249,6 +259,7 @@ switch_list = [(switch1A,True,switch1A_actions,'pyz'),
                (switch8B,True,switch8B_actions,'pyz'),
                (switch9A,False,switch9A_actions,'pyz'),
                (switch10A,False,switch10A_actions,'pyz'),
+               (switch11A,False,switch11A_actions,'pyz'),
                (rotary1SW,False,rotary1SW_actions,'gaugette'),
                (rotary2SW,False,rotary2SW_actions,'gaugette') ]
 
