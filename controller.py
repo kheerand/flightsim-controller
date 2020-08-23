@@ -180,7 +180,8 @@ def switch10A_actions(state):
 def switch11A_actions(state):
     if state == 1: 
         print ("Switch 11A pressed")
-        keys = chr(0x10) + NULL_CHAR + chr(23) + NULL_CHAR*5
+        # keys = chr(0x10) + NULL_CHAR + chr(29) + NULL_CHAR*5
+        keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
     else:
         print ("Switch 11A off")
         keys = NULL_CHAR*8
@@ -259,7 +260,7 @@ switch_list = [(switch1A,True,switch1A_actions,'pyz'),
                (switch8B,True,switch8B_actions,'pyz'),
                (switch9A,False,switch9A_actions,'pyz'),
                (switch10A,False,switch10A_actions,'pyz'),
-               (switch11A,False,switch11A_actions,'pyz'),
+               (switch11A,True,switch11A_actions,'pyz'),
                (rotary1SW,False,rotary1SW_actions,'gaugette'),
                (rotary2SW,False,rotary2SW_actions,'gaugette') ]
 
