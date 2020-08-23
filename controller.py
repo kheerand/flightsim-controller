@@ -186,11 +186,13 @@ def rotary1SW_actions(state):
     if state == 1:
         print ("Rotary 1 Switch pressed")
         # keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
-        rotary1.mhz_state = 1
+        if rotary1.mhz_state == 0:
+            rotary1.mhz_state = 1
+        else:
+            rotary1.mhz_state = 0
     else:
         print ("Rotary 1 Switch off")
         # keys = NULL_CHAR*8
-        rotary1.mhz_state = 0
     return(keys)
 
 def rotary2SW_actions(state):
