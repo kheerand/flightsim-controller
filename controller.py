@@ -180,8 +180,7 @@ def switch10A_actions(state):
 def switch11A_actions(state):
     if state == 1: 
         print ("Switch 11A pressed")
-        # keys = chr(0x10) + NULL_CHAR + chr(29) + NULL_CHAR*5
-        keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
+        keys = chr(0x10) + NULL_CHAR + chr(29) + NULL_CHAR*5
     else:
         print ("Switch 11A off")
         keys = NULL_CHAR*8
