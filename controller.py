@@ -209,11 +209,18 @@ def rotary1_actions(delta):
     if delta < 0:
         print ("Rotary 1 turned clockwise")
         # keys = chr(32) + NULL_CHAR + chr(29) + NULL_CHAR*5
-        keys = chr(0x50) + NULL_CHAR + chr(29) + NULL_CHAR*5
+        if rotary1.mhz_state == 0:
+            keys = chr(0x50) + NULL_CHAR + chr(29) + NULL_CHAR*5
+        else:
+            keys = NULL_CHAR*2 + chr(29) + NULL_CHAR*5
     else:
         print ("Rotary 1 turned anticlockwise")
         # keys = NULL_CHAR*2 + chr(50) + NULL_CHAR*5
-        keys = NULL_CHAR*2 + chr(29) + NULL_CHAR*5
+        if rotary1.mhz_state == 0:
+            keys = NULL_CHAR*2 + chr(29) + NULL_CHAR*5
+        else:
+            keys = chr(0x20) + NULL_CHAR + chr(29) + NULL_CHAR*5
+
     return(keys)
 
 def rotary2_actions(delta):
