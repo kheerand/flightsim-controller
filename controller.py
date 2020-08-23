@@ -208,7 +208,7 @@ def rotary1_actions(delta):
     print("Rotary rotary1_actions being executed")
     if delta < 0:
         print ("Rotary 1 turned clockwise")
-        keys = chr(229) + NULL_CHAR + chr(29) + NULL_CHAR*5
+        keys = chr(32) + NULL_CHAR + chr(29) + NULL_CHAR*5
     else:
         print ("Rotary 1 turned anticlockwise")
         # keys = NULL_CHAR*2 + chr(50) + NULL_CHAR*5
