@@ -190,19 +190,13 @@ def rotary1SW_actions(state):
     keys = ''
     print("Rotary switch1SW_action being executed")
 
-    # TODO: This bit is a ugly coding. Fix up later to be clean so that
-    # the global variable is set in the main code rather than inside
-    # this function.
     if state == 1:
         print ("Rotary 1 Switch pressed")
-        # keys = NULL_CHAR*2 + chr(23) + NULL_CHAR*5
-        if rotary1.mhz_state == 0:
-            rotary1.mhz_state = 1
-        else:
-            rotary1.mhz_state = 0
+        rotary1.mhz_state = not rotary1.mhz_state # toggle the state
     else:
         print ("Rotary 1 Switch off")
-        # keys = NULL_CHAR*8
+        pass
+
     return(keys)
 
 def rotary2SW_actions(state):
