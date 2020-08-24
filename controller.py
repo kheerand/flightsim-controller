@@ -42,10 +42,11 @@ rotary1 = gaugette.rotary_encoder.RotaryEncoder(gpio, rotary1A, rotary1B)
 rotary1.mhz_state = 0 # Additional status flag to remember switch presses
 rotary1.start()
 rotary1SW = gaugette.switch.Switch(gpio, rotary1SW)
-rotary2 = gaugette.rotary_encoder.RotaryEncoder(gpio, rotary2A, rotary2B)
-rotary2.mhz_state = 0 # Additional status flag to remember switch presses
-rotary2.start()
-rotary2SW = gaugette.switch.Switch(gpio, rotary2SW)
+# rotary2 = gaugette.rotary_encoder.RotaryEncoder(gpio, rotary2A, rotary2B)
+# rotary2.mhz_state = 0 # Additional status flag to remember switch presses
+# rotary2.start()
+# rotary2SW = gaugette.switch.Switch(gpio, rotary2SW)
+rotary2 = ''
 
 def send_keys(keys,momentary=False):
     with open('/dev/hidg0', 'rb+') as fd:
